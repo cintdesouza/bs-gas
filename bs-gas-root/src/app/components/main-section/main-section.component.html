@@ -1,4 +1,5 @@
 <section class="main-section">
+    <div class="main-div">
     <h1 class="main-title">&#8592; Entradas e Saídas</h1>
     <div class="import-div"><div class="title-and-description"><span>Importar</span>
         <span class="import-data">Importar notas fiscais do seu computador</span><span class="chevron-up">
@@ -27,17 +28,18 @@
             <div class="input-and-label">
                 <label for="model-select">Modelo</label>
                 <select id="model-select">
+                    <option>Selecione</option>
                     <option value="55">NF-e</option>
                     <option value="64">NFC-e</option>
                 </select>
             </div>
-            <app-input [label]="noteLabel" [type]="textType" class="sequence-input" [placeholder]="search"></app-input>
+            <app-input [label]="noteLabel" [type]="textType" class="sequence-input" [placeholder]="select"></app-input>
 
-            <app-input [label]="clientLabel" [type]="textType" class="sequence-input" [placeholder]="search"></app-input>
-            <app-input [label]="supplierLabel" [type]="textType" class="sequence-input" [placeholder]="search"></app-input>
+            <app-input [label]="clientLabel" [type]="textType" class="sequence-input" [placeholder]="typeHere"></app-input>
+            <app-input [label]="supplierLabel" [type]="textType" class="sequence-input" [placeholder]="typeHere"></app-input>
             <app-input [label]="sinceLabel" [type]="textType" class="sequence-input" [placeholder]="search"></app-input>
 
-            <app-input [label]="toLabel" [type]="textType" class="sequence-input" [placeholder]="search"></app-input>
+            <app-input [label]="toLabel" [type]="dateType" class="sequence-input"></app-input>
             
          
             <div class="input-and-label">
@@ -48,9 +50,11 @@
                 </select>
             </div>
         </div>
-        <div class="buttons-div"><button class="new-button">+ Novo Entrada/Saída</button><button class="green-button">Filtrar</button></div>
+        <div class="buttons-div"><button class="new-button" type="button" routerLinkActive="active" (click)="navigateToNewEntry()">
+            + Novo Entrada/Saída</button><button class="green-button">Filtrar</button></div>
     </div>
     <div class="data-div">
+        <div class="inside-data-div">
         <div class="divisions-div">
             <div class="division-title">Operação</div>
             <div class="division-title">Data</div>
@@ -74,7 +78,7 @@
             <div class="division-title">R$ 2.000,00</div>
             <div class="division-title">Cadastrada</div>
             <div class="division-title">
-                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png"></div>
+                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png" class="pencil"></div>
                 <div class="icon-div"><img src="../../../assets/icons8-trash.svg" class="trash-can"></div></div>
         </div>
         <div class="register-example-div">
@@ -88,7 +92,7 @@
             <div class="division-title">R$ 2.000,00</div>
             <div class="division-title">Cadastrada</div>
             <div class="division-title">
-                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png"></div>
+                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png" class="pencil"></div>
                 <div class="icon-div"><img src="../../../assets/icons8-trash.svg" class="trash-can"></div></div>
         </div>
         <div class="register-example-div">
@@ -102,9 +106,81 @@
             <div class="division-title">R$ 2.000,00</div>
             <div class="division-title">Cadastrada</div>
             <div class="division-title">
-                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png"></div>
+                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png" class="pencil"></div>
                 <div class="icon-div"><img src="../../../assets/icons8-trash.svg" class="trash-can"></div>
             </div>
         </div>
+        <div class="register-example-div">
+            <div class="division-title">002-COMPRA</div>
+            <div class="division-title">01/01/2023</div>
+            <div class="division-title">NFC-e</div>
+            <div class="division-title">01</div>
+            <div class="division-title">10</div>
+            <div class="division-title">Brazil Sistem</div>
+            <div class="division-title">ENTRADA</div>
+            <div class="division-title">R$ 2.000,00</div>
+            <div class="division-title">Cadastrada</div>
+            <div class="division-title">
+                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png" class="pencil"></div>
+                <div class="icon-div"><img src="../../../assets/icons8-trash.svg" class="trash-can"></div></div>
+        </div>
+        <div class="register-example-div">
+            <div class="division-title">002-COMPRA</div>
+            <div class="division-title">01/01/2023</div>
+            <div class="division-title">NFC-e</div>
+            <div class="division-title">01</div>
+            <div class="division-title">10</div>
+            <div class="division-title">Brazil Sistem</div>
+            <div class="division-title">ENTRADA</div>
+            <div class="division-title">R$ 2.000,00</div>
+            <div class="division-title">Cadastrada</div>
+            <div class="division-title">
+                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png" class="pencil"></div>
+                <div class="icon-div"><img src="../../../assets/icons8-trash.svg" class="trash-can"></div></div>
+        </div>
+        <div class="register-example-div">
+            <div class="division-title">002-COMPRA</div>
+            <div class="division-title">01/01/2023</div>
+            <div class="division-title">NFC-e</div>
+            <div class="division-title">01</div>
+            <div class="division-title">10</div>
+            <div class="division-title">Brazil Sistem</div>
+            <div class="division-title">ENTRADA</div>
+            <div class="division-title">R$ 2.000,00</div>
+            <div class="division-title">Cadastrada</div>
+            <div class="division-title">
+                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png" class="pencil"></div>
+                <div class="icon-div"><img src="../../../assets/icons8-trash.svg" class="trash-can"></div></div>
+        </div>
+        <div class="register-example-div">
+            <div class="division-title">002-COMPRA</div>
+            <div class="division-title">01/01/2023</div>
+            <div class="division-title">NFC-e</div>
+            <div class="division-title">01</div>
+            <div class="division-title">10</div>
+            <div class="division-title">Brazil Sistem</div>
+            <div class="division-title">ENTRADA</div>
+            <div class="division-title">R$ 2.000,00</div>
+            <div class="division-title">Cadastrada</div>
+            <div class="division-title">
+                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png" class="pencil"></div>
+                <div class="icon-div"><img src="../../../assets/icons8-trash.svg" class="trash-can"></div></div>
+        </div>
+        <div class="register-example-div">
+            <div class="division-title">002-COMPRA</div>
+            <div class="division-title">01/01/2023</div>
+            <div class="division-title">NFC-e</div>
+            <div class="division-title">01</div>
+            <div class="division-title">10</div>
+            <div class="division-title">Brazil Sistem</div>
+            <div class="division-title">ENTRADA</div>
+            <div class="division-title">R$ 2.000,00</div>
+            <div class="division-title">Cadastrada</div>
+            <div class="division-title">
+                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png" class="pencil"></div>
+                <div class="icon-div"><img src="../../../assets/icons8-trash.svg" class="trash-can"></div></div>
+        </div>
     </div>
+    </div>
+</div>
 </section>

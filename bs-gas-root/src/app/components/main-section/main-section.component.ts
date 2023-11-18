@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { InputComponent } from '../input/input.component';
 
 @Component({
@@ -10,6 +11,8 @@ import { InputComponent } from '../input/input.component';
   styleUrl: './main-section.component.sass'
 })
 export class MainSectionComponent {
+  private router = inject(Router)
+
   operationLabel = "Operação"
   dataLabel = "Data"
   noteLabel = "Número Nota"
@@ -21,4 +24,10 @@ export class MainSectionComponent {
   textType = "text"
   dateType = "date"
   search = "Buscar"
+  select = "Selecione"
+  typeHere = "Digite aqui"
+
+  navigateToNewEntry() {
+    this.router.navigate(["/new"])
+  }
 }
