@@ -15,5 +15,5 @@ import { CommonModule } from '@angular/common';
 export class InputComponent {
   @Input() label = ''
   @Input() type = ''
-  @Input () placeholder = ''
+  @Input() placeholder = ''
 }

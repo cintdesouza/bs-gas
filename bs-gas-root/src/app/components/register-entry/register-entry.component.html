@@ -1,1 +1,77 @@
-<p>register-entry works!</p>
+<section class="main-section">
+    <div class="main-div">
+        <h1 class="main-title">&#8592; Nova entrada/saída</h1>
+        <div class="operation-div">
+            <app-input [label]="operationLabel" [type]="textType" class="sequence-input" [placeholder]="search"></app-input>
+            <app-input [label]="movementLabel" [type]="textType" class="sequence-input" [placeholder]="entry"></app-input>
+            <app-input [label]="situationLabel" [type]="textType" class="sequence-input" [placeholder]="newPlaceholder"></app-input>
+            <div class="input-and-label">
+                <label for="model-select">Modelo</label>
+                    <select id="model-select">
+                        <option>Selecione</option>
+                        <option value="55">NF-e</option>
+                        <option value="64">NFC-e</option>
+                    </select>
+            </div>
+            <div class="double-input-div">
+                <app-input [label]="seriesLabel" [type]="textType" class="double-input" [placeholder]="numberZero"></app-input>
+                <app-input [label]="numberLabel" [type]="textType" class="double-input" [placeholder]="numberZero"></app-input>
+            </div>
+            <app-input [label]="operationLabel" [type]="textType" class="sequence-input" [placeholder]="search"></app-input>
+            <app-input [label]="dateLabel" [type]="dateType" class="sequence-input"></app-input>
+            <app-input [label]="genDateLabel" [type]="dateType" class="sequence-input"></app-input>
+            <app-input [label]="employeeLabel" [type]="textType" class="sequence-input" [placeholder]="typeHere"></app-input>
+            <app-input [label]="freightLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+            <app-input [label]="totalValueLabel" [type]="textType" class="sequence-input" [placeholder]="totalValuePlaceholder"></app-input>
+        </div>
+        <div class="products-div"><div class="product-title-div"><span class="product-title">Produtos</span> 
+            <button class="green-button">Adicionar</button></div>
+            <div class="grey-div">
+                <app-input [label]="productLabel" [type]="textType" class="sequence-input" [placeholder]="search"></app-input>
+            <div class="four-inputs-div">
+                <app-input [label]="quantityLabel" [type]="textType" class="sequence-input" [placeholder]="numberZero"></app-input>
+                <app-input [label]="unitLabel" [type]="textType" class="sequence-input" [placeholder]="unPlaceholder"></app-input>
+                <app-input [label]="unitaryLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+                <app-input [label]="totalLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+            </div>
+            <div class="products-items-div"><img src="../../../assets/icons8-height-24.png">
+                <img src="../../../assets/icons8-trash-2.svg"></div>
+                <div class="many-inputs-divs">
+                    <app-input [label]="discountLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+                    <app-input [label]="freightLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+                    <app-input [label]="expenseLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+                    <app-input [label]="insuranceLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+                    <app-input [label]="icmsLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+                </div>
+                <div class="many-inputs-divs">
+                    <app-input [label]="icmsstLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+                    <app-input [label]="ipiLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+                    <app-input [label]="pisLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+                    <app-input [label]="cofinsLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+                </div>
+                <div class="two-input-div">
+                    <div class="input-and-label">
+                        <label for="reweighing-select">Repesagem</label>
+                        <select id="reweighing-select">
+                            <option value="Peso">Peso</option>
+                        </select>
+                    </div>
+                    <app-input [label]="weightLabel" [type]="textType" class="sequence-input" [placeholder]="weightPlaceholder"></app-input>
+                </div>
+            </div>
+        </div>
+        <div class="bills-div">
+            <div class="product-title-div"><span class="product-title">Contas a pagar</span></div>
+            <div class="grey-div">
+                <div class="many-inputs-divs">
+                    <app-input [label]="paymentLabel" [type]="textType" class="sequence-input" [placeholder]="methodPlaceholder"></app-input>
+                    <app-input [label]="totalLabel" [type]="textType" class="sequence-input" [placeholder]="valuePlaceholder"></app-input>
+                    <app-input [label]="registerLabel" [type]="textType" class="sequence-input" [placeholder]="registerPlaceholder"></app-input>
+                    <app-input [label]="conditionLabel" [type]="textType" class="sequence-input" [placeholder]="conditionPlaceholder"></app-input>
+                </div>
+            </div>
+        </div>
+        <div class="two-buttons-div"><button class="grey-button" (click)="navigateToHome()">Voltar</button>
+            <button class="green-button">Salvar</button></div>
+    </div>
+</section>
