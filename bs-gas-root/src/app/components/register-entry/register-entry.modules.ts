@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { InputComponent } from '../input/input.component';
-import { RegisterEntryComponent } from './register-entry.component';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { InputComponent } from "../input/input.component";
+import { RegisterEntryComponent } from "./register-entry.component";
 
 @NgModule({
   imports: [BrowserModule],

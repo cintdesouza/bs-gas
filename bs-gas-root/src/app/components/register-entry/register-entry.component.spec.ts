@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { RegisterEntryComponent } from './register-entry.component';
+import { RegisterEntryComponent } from "./register-entry.component";
 
-describe('RegisterEntryComponent', () => {
+describe("RegisterEntryComponent", () => {
   let component: RegisterEntryComponent;
   let fixture: ComponentFixture<RegisterEntryComponent>;
 
@@ -17,7 +17,7 @@ describe('RegisterEntryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

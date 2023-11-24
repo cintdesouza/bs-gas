@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: 'app-input',
+  selector: "app-input",
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -10,10 +10,10 @@ import { CommonModule } from '@angular/common';
   <label>{{ label }}</label>
   <input type="{{ type }}" placeholder="{{ placeholder }}">
   </div>`,
-  styleUrl: './input.component.sass'
+  styleUrl: "./input.component.sass"
 })
 export class InputComponent {
-  @Input() label = ''
-  @Input() type = ''
-  @Input() placeholder = ''
+  @Input() label = ""
+  @Input() type = ""
+  @Input() placeholder = ""
 }
