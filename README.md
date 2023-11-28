@@ -6,9 +6,14 @@ A API utilizada para o funcionamento simultâneo ainda não está disponível.
 `TECNOLOGIA UTILIZADA:`
 Angular 17.0.0
 
+`BANCO DE DADOS:` 
+```
+https://github.com/cintdesouza/bs-api
+```
+
 `OBSERVAÇÕES`
 Pretende-se criar um componente específico para input do tipo select em um futuro breve.
-Há a possobilidade de adicionar a funcionalidade de adicionar mais seções de produtos 
+Há a possibilidade de adicionar a funcionalidade de adicionar mais seções de produtos 
 na página de Nova entrada/saída. O botão de height também poderá ter o efeito de expandir
 ou diminuir na parte de adição de produtos.
 Também se pretende adicionar funcionalidades aos botões chevron, para expandir e diminuir
@@ -17,3 +22,4 @@ Em breve, os ícones dos inputs serão adicionados. Por ser um MVP, detalhes mai
 profundos do design foram deixados por último.
 Foi buscado um visual mais responsivo, que tenha eficiência independência do tamanho de
 tela do usuário, existindo também a versão mobile.
+Possivelmente terá um modal para o update dos itens adicionados.
