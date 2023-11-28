@@ -1,4 +1,4 @@
-@import "../../../assets/styles/vars.scss"
+@import "../../../../assets/styles/vars.scss"
 
 :host
     width: 100%
@@ -8,6 +8,23 @@
     padding-top: 3rem
     overflow-y: auto
     height: 94vh
+
+input
+    border-radius: 5px
+    background-color: $grey-3
+    width: 100%
+    height: 100%
+    color: $white-fixed
+
+input:focus
+    outline: none
+
+input[type=date]
+    width: 98.7%
+
+::placeholder
+    padding-left: 1rem
+    color: $white-fixed
 
 .main-div
     width: 100%
@@ -93,13 +110,13 @@ select:focus
     align-items: center
     justify-content: space-evenly
 
-.input-and-label, .sequence-input, .double-input-div
+.input-and-label, .double-input-div, .double-input-label
     position: relative
     width: 47.5%
     height: 100%
     height: 40px
 
-.input-and-label
+.input-and-label, .double-input-label
     height: 42px
 
 .four-inputs-div
@@ -157,18 +174,15 @@ select:focus
 
 @media (min-width: 1025px)
     .input-and-label, .double-input-div
-        width: 31.4%
-
-    .sequence-input
-        width: 31%
+        width: 32%
 
     .four-inputs-div
         width: 60%
 
 @media (min-width: 1441px)
-    .input-and-label, .sequence-input, .double-input-div
+    .input-and-label, .double-input-div
         width: 31.5%
 
 @media (min-width: 1880px)
-    .input-and-label, .sequence-input, .double-input-div
+    .input-and-label, .double-input-div
         width: 32.5%

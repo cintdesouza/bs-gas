@@ -1,0 +1,173 @@
+<section class="main-section">
+    <form class="main-div" #form="ngForm" (ngSubmit)="submitForm(form)">
+        <h1 class="main-title">&#8592; Nova entrada/saída</h1>
+        <div class="operation-div">
+            <div class="input-and-label">
+                <label>{{ operationLabel }}</label>
+                <input [type]="textType" [placeholder]="search" name="operation" required ngModel>
+            </div>
+            <div class="input-and-label">
+                <label>{{ movementLabel }}</label>
+                <input [type]="textType" [placeholder]="entry" name="movement" required ngModel>
+            </div>
+            <div class="input-and-label">
+                <label>{{ situationLabel }}</label>
+                <input [type]="textType" [placeholder]="newPlaceholder" name="situation" required ngModel>
+            </div>
+            <div class="input-and-label">
+                <label for="model-select">Modelo</label>
+                    <select id="model-select" name="model" ngModel>
+                        <option ngValue="">Selecione</option>
+                        <option ngValue="55">NF-e</option>
+                        <option ngValue="65">NFC-e</option>
+                    </select>
+            </div>
+            <div class="double-input-div">
+                <div class="double-input-label">
+                    <label>{{ seriesLabel }}</label>
+                    <input [type]="numberType" class="double-input" [placeholder]="numberZero" name="series" required ngModel>
+                </div>
+                <div class="double-input-label">
+                    <label>{{ numberLabel }}</label>
+                    <input [type]="numberType" class="double-input" [placeholder]="numberZero" name="number" required ngModel>
+                </div>
+            </div>
+
+            <div class="input-and-label">
+                <label>{{ supplierLabel }}</label>
+                <input [type]="textType" [placeholder]="search" name="supplier" required ngModel>
+            </div>
+            <div class="input-and-label">
+                <label>{{ dateLabel }}</label>
+                <input [type]="dateType" name="issueDate" required ngModel>
+            </div>
+            <div class="input-and-label">
+                <label>{{ genDateLabel }}</label>
+                <input [type]="dateType" name="genDate" required ngModel>
+            </div>
+            <div class="input-and-label">
+                <label>{{ employeeLabel }}</label>
+                <input [type]="textType" [placeholder]="typeHere" name="employee" required ngModel>
+            </div>
+            <div class="input-and-label">
+                <label>{{ freightLabel }}</label>
+                <input [type]="numberType" [placeholder]="valuePlaceholder" name="freight" required ngModel>
+            </div>
+            <div class="input-and-label">
+                <label>{{ totalValueLabel }}</label>
+                <input [type]="numberType" [placeholder]="totalValuePlaceholder" name="totalValue" required ngModel>
+            </div>
+        </div>
+        <div class="products-div"><div class="product-title-div"><span class="product-title">Produtos</span> 
+            <button class="green-button">Adicionar</button></div>
+            <div class="grey-div">
+                <div class="input-and-label">
+                    <label>{{ productLabel }}</label>
+                    <input [type]="textType" [placeholder]="search" name="product" required ngModel>
+                </div>
+            <div class="four-inputs-div">
+                <div class="input-and-label">
+                    <label>{{ quantityLabel }}</label>
+                    <input [type]="numberType" [placeholder]="numberZero" name="quantity" required ngModel>
+                </div>
+                <div class="input-and-label">
+                    <label>{{ unitLabel }}</label>
+                    <input [type]="numberType" [placeholder]="unPlaceholder" name="unit" required ngModel>
+                </div>
+                <div class="input-and-label">
+                    <label>{{ unitaryLabel }}</label>
+                    <input [type]="numberType" [placeholder]="valuePlaceholder" name="unitaryValue" required ngModel>
+                </div>
+                <div class="input-and-label">
+                    <label>{{ totalLabel }}</label>
+                    <input [type]="numberType" [placeholder]="valuePlaceholder" name="total" required ngModel>
+                </div>
+            </div>
+            <div class="products-items-div"><img src="../../../assets/icons8-height-24.png">
+                <img src="../../../assets/icons8-trash-2.svg"></div>
+                <div class="many-inputs-divs">
+                    <div class="input-and-label">
+                        <label>{{ discountLabel }}</label>
+                        <input [type]="numberType" [placeholder]="valuePlaceholder" name="discount" required ngModel>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ freightLabel }}</label>
+                        <input [type]="numberType" [placeholder]="valuePlaceholder" name="productFreight" required ngModel>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ expenseLabel }}</label>
+                        <input [type]="numberType" [placeholder]="valuePlaceholder" name="expenses" required ngModel>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ insuranceLabel }}</label>
+                        <input [type]="numberType" [placeholder]="valuePlaceholder" name="insurance" required ngModel>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ icmsLabel }}</label>
+                        <input [type]="numberType" [placeholder]="valuePlaceholder" name="icms" required ngModel>
+                    </div>
+                </div>
+                <div class="many-inputs-divs">
+                    <div class="input-and-label">
+                        <label>{{ icmsstLabel }}</label>
+                        <input [type]="numberType" [placeholder]="valuePlaceholder" name="icmsST" required ngModel>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ ipiLabel }}</label>
+                        <input [type]="numberType" [placeholder]="valuePlaceholder" name="ipi" required ngModel>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ pisLabel }}</label>
+                        <input [type]="numberType" [placeholder]="valuePlaceholder" name="pis" required ngModel>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ cofinsLabel }}</label>
+                        <input [type]="numberType" [placeholder]="valuePlaceholder" name="cofins" required ngModel>
+                    </div>
+                </div>
+                <div class="two-input-div">
+                    <div class="input-and-label">
+                        <label for="reweighing-select">Repesagem</label>
+                        <select id="reweighing-select" name="reweighing" required ngModel>
+                            <option ngValue="">Selecione</option>
+                            <option ngValue="Peso">Peso</option>
+                        </select>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ weightLabel }}</label>
+                        <input [type]="numberType" [placeholder]="weightPlaceholder" name="weight" required ngModel>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ reweighingLabel }}</label>
+                        <input [type]="numberType" [placeholder]="valuePlaceholder" name="reweighingValue" required ngModel>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bills-div">
+            <div class="product-title-div"><span class="product-title">Contas a pagar</span></div>
+            <div class="grey-div">
+                <div class="many-inputs-divs">
+                    <div class="input-and-label">
+                        <label>{{ paymentLabel }}</label>
+                        <input [type]="textType" [placeholder]="methodPlaceholder" name="method" required ngModel>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ totalLabel }}</label>
+                        <input [type]="numberType" [placeholder]="valuePlaceholder" name="finalTotal" required ngModel>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ registerLabel }}</label>
+                        <input [type]="textType" [placeholder]="registerPlaceholder" name="account" required ngModel>
+                    </div>
+                    <div class="input-and-label">
+                        <label>{{ conditionLabel }}</label>
+                        <input [type]="textType" [placeholder]="conditionPlaceholder" name="condition" required ngModel>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="two-buttons-div"><button class="grey-button" (click)="navigateToHome()">Voltar</button>
+            <button class="green-button" type="submit" [disabled]="form.invalid">Salvar</button></div>
+    </form>
+</section>

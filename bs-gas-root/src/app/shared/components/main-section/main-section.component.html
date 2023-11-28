@@ -1,0 +1,103 @@
+<section class="main-section">
+    <div class="main-div">
+    <h1 class="main-title">&#8592; Entradas e Saídas</h1>
+    <div class="import-div"><div class="title-and-description"><span>Importar</span>
+        <span class="import-data">Importar notas fiscais do seu computador</span><span class="chevron-up">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                <style>svg{fill:#ffffff}</style>
+                <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 
+                0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 
+                0s-12.5-32.8 0-45.3l192-192z"/></svg>
+        </span></div>
+        <div class="three-inputs">
+            <div class="upload-button">Upload do Documento Fiscal <img src="../../../assets/icons8-cloud-upload-24.png"></div>
+            <app-input [label]="operationLabel" [type]="textType" class="operation-input" [placeholder]="search"></app-input>
+            <app-input [label]="dataLabel" [type]="dateType" class="date-input"></app-input></div>
+        <button class="green-button">Importar nota</button></div>
+
+    <div class="input-div">
+        <div class="title-and-description"><span class="search-title">Pesquisar</span><span class="chevron-up">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                <style>svg{fill:#ffffff}</style>
+                <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 
+                0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 
+                0s-12.5-32.8 0-45.3l192-192z"/></svg>
+        </span></div>
+        <div class="three-sequence-inputs">
+            <app-input [label]="operationLabel" [type]="textType" class="sequence-input" [placeholder]="search"></app-input>
+            <div class="input-and-label">
+                <label for="model-select">Modelo</label>
+                <select id="model-select">
+                    <option>Selecione</option>
+                    <option value="55">NF-e</option>
+                    <option value="64">NFC-e</option>
+                </select>
+            </div>
+            <app-input [label]="noteLabel" [type]="textType" class="sequence-input" [placeholder]="select"></app-input>
+
+            <app-input [label]="clientLabel" [type]="textType" class="sequence-input" [placeholder]="typeHere"></app-input>
+            <app-input [label]="supplierLabel" [type]="textType" class="sequence-input" [placeholder]="typeHere"></app-input>
+            <app-input [label]="sinceLabel" [type]="textType" class="sequence-input" [placeholder]="search"></app-input>
+
+            <app-input [label]="toLabel" [type]="dateType" class="sequence-input"></app-input>
+            
+         
+            <div class="input-and-label">
+                <label for="situation-select">Situação</label>
+                <select id="situation-select">
+                    <option value="Compra">Compra</option>
+                    <option value="Transferência">Transferência</option>
+                </select>
+            </div>
+        </div>
+        <div class="buttons-div"><button class="new-button" type="button" routerLinkActive="active" (click)="navigateToNewEntry()">
+            + Novo Entrada/Saída</button><button class="green-button">Filtrar</button></div>
+    </div>
+    <div class="data-div">
+        <div class="inside-data-div">
+        <div class="divisions-div">
+            <div class="division-title">Operação</div>
+            <div class="division-title">Data</div>
+            <div class="division-title">Modelo</div>
+            <div class="division-title">Série</div>
+            <div class="division-title">Número</div>
+            <div class="division-title">Cliente/Forn...</div>
+            <div class="division-title">Tipo mov...</div>
+            <div class="division-title">Valor Total</div>
+            <div class="division-title">Situação</div>
+            <div class="division-title">Ações</div>
+        </div>
+        <ul>
+        <li class="register-li" *ngFor="let prod of products; index as index" id="{{ prod.id }}">
+            <div class="division-title">{{ prod.operation }}</div>
+            <div class="division-title">{{ prod.issueDate.toString()[9] }}{{ prod.issueDate.toString()[8] }}/{{ prod.issueDate.toString()[5] }}{{ prod.issueDate.toString()[6] }}/{{ prod.issueDate.toString()[0] }}{{ prod.issueDate.toString()[1] }}{{ prod.issueDate.toString()[2] }}{{ prod.issueDate.toString()[3] }}</div>
+            <div class="division-title" *ngIf="prod.model == 65; else elseCondition">NFc-e</div>
+            <ng-template #elseCondition><div class="division-title">NF-e</div></ng-template>
+            <div class="division-title">{{ prod.series }}</div>
+            <div class="division-title">{{ prod.number }}</div>
+            <div class="division-title">{{ prod.supplier }}</div>
+            <div class="division-title">{{ prod.movement }}</div>
+            <div class="division-title">{{ prod.finalTotal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) }}</div>
+            <div class="division-title">{{ prod.situation }}</div>
+            <div class="division-title">
+                <div class="icon-div"><img src="../../../assets/icons8-pencil-24.png" class="pencil"></div>
+                <div class="icon-div"><img src="../../../assets/icons8-trash.svg" class="trash-can" (click)="destroyProduct(prod.id, index)"></div></div>
+        </li>
+        </ul>
+    </div>
+    <div class="pagination-div">
+        <span>itens por pág</span>
+        <select class="page-select">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+        </select>
+        <span><strong>1-10</strong> de <strong>470</strong></span>
+        <div class="inactive-pagination-button"><img src="../../../assets/icons8-first-1-50.png" class="pagination-icon"></div>
+        <div class="inactive-pagination-button"><img src="../../../assets/icons8-chevron-left-50.png" class="pagination-icon"></div>
+        <div class="active-pagination-button"><img src="../../../assets/icons8-chevron-right-50.png" class="pagination-icon"></div>
+        <div class="active-pagination-button"><img src="../../../assets/icons8-last-1-50.png" class="pagination-icon"></div>
+    </div>
+    </div>
+</div>
+</section>
