@@ -2,7 +2,7 @@ import { Component, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { InputComponent } from "../input/input.component";
 import { Router } from "@angular/router";
-import { FormBuilder, FormsModule, NgForm, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { BsGasService } from '../../../services/bs-gas.service';
 
 @Component({
@@ -16,39 +16,39 @@ export class RegisterEntryComponent {
   #fb = inject(FormBuilder)
 
   public registryForm = this.#fb.group({
-    operation: [''],
-      movement: [''],
-      situation: [''],
-      model: [''],
-      series: [''],
-      number: [''],
-      supplier: [''],
-      issueDate: [''],
-      genDate: [''],
-      employee: [''],
-      freight: [''],
-      totalValue: [''],
-      product: [''],
-      quantity: [''],
-      unit: [''],
-      unitaryValue: [''],
-      total: [''],
-      discount: [''],
-      productFreight: [''],
-      expenses: [''],
-      insurance: [''],
-      icms: [''],
-      icmsST: [''],
-      ipi: [''],
-      pis: [''],
-      cofins: [''],
-      reweighing: [''],
-      weight: [''],
-      reweighingValue: [''],
-      method: [''],
-      finalTotal: [''],
-      account: [''],
-      condition: ['']
+    operation: ['', Validators.required],
+      movement: ['', Validators.required],
+      situation: ['', Validators.required],
+      model: ['', Validators.required],
+      series: ['', [Validators.required, Validators.min(1)]],
+      number: ['', [Validators.required, Validators.min(1)]],
+      supplier: ['', Validators.required],
+      issueDate: ['', Validators.required],
+      genDate: ['', Validators.required],
+      employee: ['', Validators.required],
+      freight: ['', [Validators.required, Validators.min(1)]],
+      totalValue: ['', [Validators.required, Validators.min(1)]],
+      product: ['', Validators.required],
+      quantity: ['', [Validators.required, Validators.min(1)]],
+      unit: ['', [Validators.required, Validators.min(1)]],
+      unitaryValue: ['', [Validators.required, Validators.min(1)]],
+      total: ['', [Validators.required, Validators.min(1)]],
+      discount: ['', [Validators.required, Validators.min(1)]],
+      productFreight: ['', [Validators.required, Validators.min(1)]],
+      expenses: ['', [Validators.required, Validators.min(1)]],
+      insurance: ['', [Validators.required, Validators.min(1)]],
+      icms: ['', [Validators.required, Validators.min(1)]],
+      icmsST: ['', [Validators.required, Validators.min(1)]],
+      ipi: ['', [Validators.required, Validators.min(1)]],
+      pis: ['', [Validators.required, Validators.min(1)]],
+      cofins: ['', [Validators.required, Validators.min(1)]],
+      reweighing: ['', Validators.required],
+      weight: ['', [Validators.required, Validators.min(1)]],
+      reweighingValue: ['', [Validators.required, Validators.min(1)]],
+      method: ['', Validators.required],
+      finalTotal: ['', [Validators.required, Validators.min(1)]],
+      account: ['', Validators.required],
+      condition: ['', Validators.required]
   })
 
   private router = inject(Router);
@@ -57,7 +57,269 @@ export class RegisterEntryComponent {
     this.router.navigate(["/"]);
   }
 
-  constructor(private bsService: BsGasService) {}
+  public freightValue: string | null = ""
+  public unitaryValue: string | null = ""
+  public quantityValue: string | null = ""
+  public discountValue: string | null = ""
+  public productFreightValue: string | null = ""
+  public expensesValue: string | null = ""
+  public insuranceValue: string | null = ""
+  public icmsValue: string | null = ""
+  public icmsstValue: string | null = ""
+  public ipiValue: string | null = ""
+  public pisValue: string | null = ""
+  public cofinsValue: string | null = ""
+  public reweighingValue: string | null = ""
+  public totalValue: number = 0
+  public finalValue: number = 0
+  public unitaryTotal: number = 0
+
+  constructor(private bsService: BsGasService) {
+    this.registryForm.get("freight")?.valueChanges.subscribe(value => {
+      this.freightValue = value
+
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      this.totalValue = (Number(this.freightValue))
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("totalValue")?.setValue(this.totalValue.toString(), { onlySelf: true })
+    })
+
+
+    this.registryForm.get("quantity")?.valueChanges.subscribe(value => {
+      this.quantityValue = value
+      this.unitaryTotal = (Number(this.unitaryValue)) * Number(this.quantityValue)
+      
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+      
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      if (typeof(this.unitaryTotal) != "number") {
+        this.unitaryTotal = 0
+      }
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
+    })
+
+
+    this.registryForm.get("unitaryValue")?.valueChanges.subscribe(value => {
+      this.unitaryValue = value
+      this.unitaryTotal = (Number(this.unitaryValue)) * Number(this.quantityValue)       
+     
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      this.totalValue = (Number(this.freightValue))
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      if (typeof(this.unitaryTotal) != "number") {
+        this.unitaryTotal = 0
+      }
+      
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("totalValue")?.setValue(this.totalValue.toString(), { onlySelf: true })
+    })
+
+
+    this.registryForm.get("discount")?.valueChanges.subscribe(value => {
+      this.discountValue = value
+            
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
+    })
+
+
+    this.registryForm.get("productFreight")?.valueChanges.subscribe(value => {
+      this.productFreightValue = value
+            
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
+    })
+
+
+    this.registryForm.get("expenses")?.valueChanges.subscribe(value => {
+      this.expensesValue = value
+            
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
+    })
+    
+
+    this.registryForm.get("insurance")?.valueChanges.subscribe(value => {
+      this.insuranceValue = value
+            
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
+    })
+    
+
+    this.registryForm.get("icms")?.valueChanges.subscribe(value => {
+      this.icmsValue = value
+            
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
+    })
+        
+
+    this.registryForm.get("icmsST")?.valueChanges.subscribe(value => {
+      this.icmsstValue = value
+            
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
+    })
+            
+
+    this.registryForm.get("ipi")?.valueChanges.subscribe(value => {
+      this.ipiValue = value
+            
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
+    })
+     
+
+    this.registryForm.get("pis")?.valueChanges.subscribe(value => {
+      this.pisValue = value
+            
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
+    })
+            
+
+    this.registryForm.get("cofins")?.valueChanges.subscribe(value => {
+      this.cofinsValue = value
+            
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
+    })
+                
+
+    this.registryForm.get("reweighingValue")?.valueChanges.subscribe(value => {
+      this.reweighingValue = value
+            
+      this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
+      Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
+      Number(this.cofinsValue) + Number(this.reweighingValue)) * Number(this.quantityValue)) - Number(this.discountValue)
+      if (Number(this.quantityValue) < 1) {
+        this.quantityValue == "1"
+      }
+
+      if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
+        this.finalValue = 0
+      }
+      this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
+    })
+  }
 
   public submitForm() {
     const formattedForm = {
