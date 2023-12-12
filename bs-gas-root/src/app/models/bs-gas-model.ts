@@ -4,7 +4,7 @@ declare enum ModelType {
  }
 
 export interface BsGasModelCreate {
-    operation: string;
+    operation: string | null | undefined;
     movement: string;
     situation: string;
     model: ModelType;

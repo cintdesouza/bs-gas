@@ -2,7 +2,7 @@ import { Component, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { InputComponent } from "../input/input.component";
 import { Router } from "@angular/router";
-import { FormsModule, NgForm, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormsModule, NgForm, ReactiveFormsModule } from "@angular/forms";
 import { BsGasService } from '../../../services/bs-gas.service';
 
 @Component({
@@ -13,6 +13,44 @@ import { BsGasService } from '../../../services/bs-gas.service';
   styleUrl: "./register-entry.component.sass",
 })
 export class RegisterEntryComponent {
+  #fb = inject(FormBuilder)
+
+  public registryForm = this.#fb.group({
+    operation: [''],
+      movement: [''],
+      situation: [''],
+      model: [''],
+      series: [''],
+      number: [''],
+      supplier: [''],
+      issueDate: [''],
+      genDate: [''],
+      employee: [''],
+      freight: [''],
+      totalValue: [''],
+      product: [''],
+      quantity: [''],
+      unit: [''],
+      unitaryValue: [''],
+      total: [''],
+      discount: [''],
+      productFreight: [''],
+      expenses: [''],
+      insurance: [''],
+      icms: [''],
+      icmsST: [''],
+      ipi: [''],
+      pis: [''],
+      cofins: [''],
+      reweighing: [''],
+      weight: [''],
+      reweighingValue: [''],
+      method: [''],
+      finalTotal: [''],
+      account: [''],
+      condition: ['']
+  })
+
   private router = inject(Router);
 
   navigateToHome() {
@@ -21,44 +59,44 @@ export class RegisterEntryComponent {
 
   constructor(private bsService: BsGasService) {}
 
-  public submitForm(form: NgForm) {
+  public submitForm() {
     const formattedForm = {
-      operation: form.value.operation,
-      movement: form.value.movement,
-      situation: form.value.situation,
-      model: Number(form.value.model),
-      series: Number(form.value.series),
-      number: Number(form.value.number),
-      supplier: form.value.supplier,
-      issueDate: form.value.issueDate.toString(),
-      genDate: form.value.genDate.toString(),
-      employee: form.value.employee,
-      freight: Number(form.value.freight),
-      totalValue: Number(form.value.totalValue),
-      product: form.value.product,
-      quantity: Number(form.value.quantity),
-      unit: Number(form.value.unit),
-      unitaryValue: Number(form.value.unitaryValue),
-      total: Number(form.value.total),
-      discount: Number(form.value.discount),
-      productFreight: Number(form.value.productFreight),
-      expenses: Number(form.value.expenses),
-      insurance: Number(form.value.insurance),
-      icms: Number(form.value.icms),
-      icmsST: Number(form.value.icmsST),
-      ipi: Number(form.value.ipi),
-      pis: Number(form.value.pis),
-      cofins: Number(form.value.cofins),
-      reweighing: form.value.reweighing.toString(),
-      weight: Number(form.value.weight),
-      reweighingValue: Number(form.value.reweighingValue),
-      method: form.value.method,
-      finalTotal: Number(form.value.finalTotal),
-      account: form.value.account,
-      condition: form.value.condition
+      operation: this.registryForm.value.operation,
+      movement: this.registryForm.value.movement,
+      situation: this.registryForm.value.situation,
+      model: Number(this.registryForm.value.model),
+      series: Number(this.registryForm.value.series),
+      number: Number(this.registryForm.value.number),
+      supplier: this.registryForm.value.supplier,
+      issueDate: this.registryForm.value.issueDate!.toString(),
+      genDate: this.registryForm.value.genDate!.toString(),
+      employee: this.registryForm.value.employee,
+      freight: Number(this.registryForm.value.freight),
+      totalValue: Number(this.registryForm.value.totalValue),
+      product: this.registryForm.value.product,
+      quantity: Number(this.registryForm.value.quantity),
+      unit: Number(this.registryForm.value.unit),
+      unitaryValue: Number(this.registryForm.value.unitaryValue),
+      total: Number(this.registryForm.value.total),
+      discount: Number(this.registryForm.value.discount),
+      productFreight: Number(this.registryForm.value.productFreight),
+      expenses: Number(this.registryForm.value.expenses),
+      insurance: Number(this.registryForm.value.insurance),
+      icms: Number(this.registryForm.value.icms),
+      icmsST: Number(this.registryForm.value.icmsST),
+      ipi: Number(this.registryForm.value.ipi),
+      pis: Number(this.registryForm.value.pis),
+      cofins: Number(this.registryForm.value.cofins),
+      reweighing: this.registryForm.value.reweighing!.toString(),
+      weight: Number(this.registryForm.value.weight),
+      reweighingValue: Number(this.registryForm.value.reweighingValue),
+      method: this.registryForm.value.method,
+      finalTotal: Number(this.registryForm.value.finalTotal),
+      account: this.registryForm.value.account,
+      condition: this.registryForm.value.condition
     }
 
-    return this.bsService.postProduct(formattedForm).subscribe((res) => {res})
+  return this.bsService.postProduct(formattedForm).subscribe((res) => {res})
   }
 
   operationLabel = "Operação";

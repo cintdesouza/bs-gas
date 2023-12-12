@@ -29,9 +29,9 @@ export class BsGasService {
       .pipe((res) => res, retry(2), catchError(this.handleError));
   }
 
-  postProduct(product: BsGasModelCreate): Observable<BsGasModelCreate> {
+  postProduct(product: any): Observable<BsGasModelCreate> {
     return this.http
-      .post<BsGasModelCreate>(this.url, product)
+      .post<any>(this.url, product)
       .pipe(retry(2), catchError(this.handleError));
   }
 
