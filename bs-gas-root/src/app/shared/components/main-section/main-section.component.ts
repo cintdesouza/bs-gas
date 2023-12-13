@@ -33,16 +33,16 @@ export class MainSectionComponent implements OnInit {
     this.router.navigate(['/new']);
   }
 
-  constructor(private bsService: BsGasService) {}
+  constructor(private _bsService: BsGasService) {}
 
   product = {} as BsGasModel | null | undefined;
   products = [] as BsGasModel[] | null | undefined;
 
   ngOnInit(): void {
-    this.bsService.getProducts().subscribe((res) => {this.products = res});
+    this._bsService.getProducts().subscribe((res) => {this.products = res});
   }
 
   public destroyProduct(productId: number, index: number) {
-    this.bsService.deleteProduct(productId).subscribe(() => {this.products?.splice(index, 1)})
+    this._bsService.deleteProduct(productId).subscribe(() => {this.products?.splice(index, 1)})
   }
 }

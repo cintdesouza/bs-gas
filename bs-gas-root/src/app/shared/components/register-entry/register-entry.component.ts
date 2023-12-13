@@ -74,7 +74,7 @@ export class RegisterEntryComponent {
   public finalValue: number = 0
   public unitaryTotal: number = 0
 
-  constructor(private bsService: BsGasService) {
+  constructor(private _bsService: BsGasService) {
     this.registryForm.get("freight")?.valueChanges.subscribe(value => {
       this.freightValue = value
 
@@ -395,7 +395,7 @@ export class RegisterEntryComponent {
       condition: this.registryForm.value.condition
     }
 
-  return this.bsService.postProduct(formattedForm).subscribe((res) => {res})
+  return this._bsService.postProduct(formattedForm).subscribe((res) => {res})
   }
 
   operationLabel = "Operação";
