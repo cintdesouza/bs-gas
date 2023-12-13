@@ -57,19 +57,19 @@ export class RegisterEntryComponent {
     this.router.navigate(["/"]);
   }
 
-  public freightValue: string | null = ""
-  public unitaryValue: string | null = ""
-  public quantityValue: string | null = ""
-  public discountValue: string | null = ""
-  public productFreightValue: string | null = ""
-  public expensesValue: string | null = ""
-  public insuranceValue: string | null = ""
-  public icmsValue: string | null = ""
-  public icmsstValue: string | null = ""
-  public ipiValue: string | null = ""
-  public pisValue: string | null = ""
-  public cofinsValue: string | null = ""
-  public reweighingValue: string | null = ""
+  public freightValue: string | number | null = ""
+  public unitaryValue: string | number | null = ""
+  public quantityValue: string | number | null = ""
+  public discountValue: string | number | null = ""
+  public productFreightValue: string | number | null = ""
+  public expensesValue: string | number | null = ""
+  public insuranceValue: string | number | null = ""
+  public icmsValue: string | number | null = ""
+  public icmsstValue: string | number | null = ""
+  public ipiValue: string | number | null = ""
+  public pisValue: string | number | null = ""
+  public cofinsValue: string | number | null = ""
+  public reweighingValue: string | number | null = ""
   public totalValue: number = 0
   public finalValue: number = 0
   public unitaryTotal: number = 0
@@ -88,6 +88,42 @@ export class RegisterEntryComponent {
       this.totalValue = (Number(this.freightValue))
       if (typeof(this.finalValue) != "number" && this.finalValue < 0) {
         this.finalValue = 0
+      }
+      if (typeof(this.unitaryValue) != "number") {
+        this.unitaryValue = 0
+      }
+      if (typeof(this.productFreightValue) != "number") {
+        this.productFreightValue = 0
+      }
+      if (typeof(this.expensesValue) != "number") {
+        this.expensesValue = 0
+      }
+      if (typeof(this.insuranceValue) != "number") {
+        this.insuranceValue = 0
+      }
+      if (typeof(this.icmsValue) != "number") {
+        this.icmsValue = 0
+      }
+      if (typeof(this.icmsstValue) != "number") {
+        this.icmsstValue = 0
+      }
+      if (typeof(this.ipiValue) != "number") {
+        this.ipiValue = 0
+      }
+      if (typeof(this.pisValue) != "number") {
+        this.pisValue = 0
+      }
+      if (typeof(this.cofinsValue) != "number") {
+        this.cofinsValue = 0
+      }
+      if (typeof(this.reweighingValue) != "number") {
+        this.reweighingValue = 0
+      }
+      if (typeof(this.quantityValue) != "number" || Number(this.quantityValue) <= 0) {
+        this.quantityValue = 1
+      }
+      if (typeof(this.discountValue) != "number") {
+        this.discountValue = 0
       }
       
       this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
@@ -112,6 +148,7 @@ export class RegisterEntryComponent {
       if (typeof(this.unitaryTotal) != "number") {
         this.unitaryTotal = 0
       }
+      
       this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
       this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
     })
@@ -119,7 +156,7 @@ export class RegisterEntryComponent {
 
     this.registryForm.get("unitaryValue")?.valueChanges.subscribe(value => {
       this.unitaryValue = value
-      this.unitaryTotal = (Number(this.unitaryValue)) * Number(this.quantityValue)       
+      this.unitaryTotal = (Number(this.unitaryValue)) * Number(this.quantityValue)    
      
       this.finalValue = ((Number(this.freightValue) + Number(this.unitaryValue) + Number(this.productFreightValue) + Number(this.expensesValue) + 
       Number(this.insuranceValue) + Number(this.icmsValue) + Number(this.icmsstValue) + Number(this.ipiValue) + Number(this.pisValue) +
@@ -137,7 +174,7 @@ export class RegisterEntryComponent {
       }
       
       this.registryForm.get("finalTotal")?.setValue(this.finalValue.toString(), { onlySelf: true })
-      this.registryForm.get("totalValue")?.setValue(this.totalValue.toString(), { onlySelf: true })
+      this.registryForm.get("total")?.setValue(this.unitaryTotal.toString(), { onlySelf: true })
     })
 
 
