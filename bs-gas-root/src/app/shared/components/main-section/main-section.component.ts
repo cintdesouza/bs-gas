@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { InputComponent } from '../input/input.component';
 import { BsGasService } from '../../../services/bs-gas.service';
 import { BsGasModel } from '../../../models/bs-gas-model';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-main-section',
@@ -43,6 +44,7 @@ export class MainSectionComponent implements OnInit {
   }
 
   public destroyProduct(productId: number, index: number) {
-    this._bsService.deleteProduct(productId).subscribe(() => {this.products?.splice(index, 1)})
+    this._bsService.deleteProduct(productId).pipe(switchMap(() => this._bsService.getProducts()))
+    .subscribe((res) => {this.products = res})
   }
 }
